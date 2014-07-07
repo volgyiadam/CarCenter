@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="CarCenter" namespace="CarCenter.Models">
+  <class name="Site" table="Site" dynamic-update="true" lazy="true" >
+    <cache usage="read-write"/>
+    <id name="Id" access="property" column="Id" type="Int32">
+      <generator class="native" />
+    </id>
+    <property name="ZipCode" access="property" column="ZipCode" type="Int32" />
+    <property name="Address" access="property" column="Address" type="String" />
+    <property name="ParkSlotCount" access="property" column="ParkSlotCount" type="Int32" />
+    <property name="ReservedCount" access="property" column="ReservedCount" type="Int32" />
+
+  </class>
+</hibernate-mapping>
