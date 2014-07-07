@@ -1,0 +1,23 @@
+﻿@model CarCenter.Models.Site
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+
+<h2>Biztos, hogy törölni akarod a következőt?</h2>
+<fieldset>
+    <legend>Telephely</legend>
+
+    <h4>@Model.ZipCode, @Model.Address</h4>
+</fieldset>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Törlés" /> |
+        @Html.ActionLink("Vissza", "Index")
+    </p>
+}

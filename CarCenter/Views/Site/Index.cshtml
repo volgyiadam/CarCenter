@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CarCenter.Models.Site>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<p>
+    @Html.ActionLink("Új telephely felvétele", "Create")
+</p>
+<form method="post">
+    Keresés cím alapján...<br />
+    <input id="searchtext" type="search" name="searchtext" value="" />
+</form>
+<table>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <h6>@Html.DisplayFor(modelItem => item.ZipCode)</h6>
+            </td>
+            <td>
+                <h6>@Html.DisplayFor(modelItem => item.Address)</h6>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                Parkolóhelyek száma:&nbsp;@Html.DisplayFor(modelItem => item.ParkSlotCount)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                @Html.ActionLink("Szerkesztés", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Autók", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Törlés", "Delete", new { id = item.Id })
+            </td>
+
+        </tr>
+        <tr>
+            <td colspan="2"><hr /></td>
+        </tr>
+    }
+
+</table>

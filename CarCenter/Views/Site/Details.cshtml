@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CarCenter.Models.Car>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<h2>@Html.DisplayText("telep")</h2>
+<div>Telephelyen lévő autók száma: @Html.DisplayText("foglalt")</div>
+<table>
+    @foreach (var item in Model)
+    {
+
+
+        <tr>
+            <td><h5>@item.Brand</h5></td>
+            <td><h5>@item.Type</h5></td>
+            <td><h5>@item.Vintage</h5></td>
+            <td valign="bottom">@item.ProductionTime.ToString("yyyy-MM-dd")</td>
+            @if (item.Condition.Length > 15)
+            {
+                <td valign="bottom">@item.Condition.Substring(0, 15)...</td>
+            }
+            else
+            {
+                <td valign="bottom">@item.Condition</td>
+            }
+            <td valign="bottom">
+                @Html.ActionLink("Szerkesztés", "Edit", "Car", new { id = item.Id }, null) |
+                @Html.ActionLink("Részletek", "Details", "Car", new { id = item.Id }, null) |
+                @Html.ActionLink("Törlés", "Delete", "Car", new { id = item.Id }, null)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5"><hr /></td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Vissza", "Index")
+</p>

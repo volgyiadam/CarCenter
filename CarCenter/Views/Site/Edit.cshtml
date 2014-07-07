@@ -1,0 +1,55 @@
+﻿@model CarCenter.Models.Site
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Telephely</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+
+        <h4>
+            Irányítószám:
+
+            @Html.EditorFor(model => model.ZipCode)
+            @Html.ValidationMessageFor(model => model.ZipCode)
+        </h4>
+
+
+        <h4>
+            Cím:
+
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </h4>
+
+        <div class="editor-label">
+            Parkolóhelyek száma:
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ParkSlotCount)
+            @Html.ValidationMessageFor(model => model.ParkSlotCount)
+        </div>
+
+        <p>
+            <input type="submit" value="OK" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Vissza", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
