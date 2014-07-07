@@ -8,7 +8,7 @@
       NHibernate.Driver.SqlClientDriver
     </property>
     <property name="connection.connection_string">
-      Server=109a8ab0-1a63-47c0-9664-a3600072d587.sqlserver.sequelizer.com;Database=db109a8ab01a6347c09664a3600072d587;User ID=qcymqlkuiljgisth;Password=wxRThBzXNL6jYDBFCx5BWJ3VgEkBwiHb74JDgwwkNjXaDp6Y7XV5WtBVD4MKq6zD;
+      Server=b642a4cb-29e8-4b9d-8474-a3610158492b.sqlserver.sequelizer.com;Database=dbb642a4cb29e84b9d8474a3610158492b;User ID=isqklchkgpbufkty;Password=x4qSzKzTokKscDcwMpg5XTNfjEW77Mp4bzYNx84Rr3jqC8wSGNk6qYjLokG4WAVJ;
     </property>
     <property name="dialect">
       NHibernate.Dialect.MsSql2008Dialect

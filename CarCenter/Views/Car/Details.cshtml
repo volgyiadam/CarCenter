@@ -1,0 +1,39 @@
+﻿@model CarCenter.Models.CarView
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<fieldset>
+    <legend>Auto</legend>
+    <h4> @Model.Brand, @Model.Type</h4>
+    <h4>@Model.Vintage</h4>
+    <hr />
+    <br />
+    <table>
+        <tr>
+            <td><b>Gyártási idő:</b></td>
+            <td><b>@Model.ProductionTime</b></td>
+        </tr>
+        <tr>
+            <td><b>Előző tulajdonosok száma:</b></td>
+            <td><b>@Model.PreviousOwners</b></td>
+        </tr>
+
+        <tr>
+            <td><b>Állapot:</b></td>
+            <td><b>@Model.Condition</b></td>
+        </tr>
+        <tr><td colspan="2"></td></tr>
+        <tr>
+            <td><b>Elérhetőség:</b></td>
+            <td><b>@Model.Site</b></td>
+        </tr>
+    </table>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Szerkesztés", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Vissza", "Index")
+</p>

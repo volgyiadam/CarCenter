@@ -1,0 +1,65 @@
+﻿@model IEnumerable<CarCenter.Models.Car>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    @Html.ActionLink("Új autó felvétele", "Create")
+</p>
+<form method="post">
+    <select id="searchform" name="searchform">
+        <option value="">Keresés......</option>
+        <option value="1">Márka</option>
+        <option value="2">Típus</option>
+        <option value="3">Évjárat</option>
+    </select>
+    <input id="searchtext" type="search" name="searchtext" value="" />
+</form>
+<table>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <h5>@Html.DisplayFor(modelItem => item.Brand)</h5>
+            </td>
+            <td>
+                <h5>@Html.DisplayFor(modelItem => item.Type)</h5>
+            </td>
+            <td>
+                <h5>@Html.DisplayFor(modelItem => item.Vintage)</h5>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                @{
+        string gyido = item.ProductionTime.ToString("yyyy-MM-dd");
+                }
+                @gyido
+            </td>
+
+            @if (item.Condition.Length > 25)
+            {
+                <td valign="bottom">@item.Condition.Substring(0, 25)...</td>
+            }
+            else
+            {
+                <td>@Html.DisplayFor(modelItem => item.Condition)</td>
+            }
+
+
+            <td>
+                @Html.ActionLink("Szerkesztés", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Részletek", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Törlés", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3"><hr /></td>
+        </tr>
+    }
+
+</table>

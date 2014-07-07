@@ -1,0 +1,26 @@
+﻿@model CarCenter.Models.Car
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<h2>Biztos, hogy törölni akarod a következőt?</h2>
+<fieldset>
+    <legend>Auto</legend>
+    <h4> @Model.Brand, @Model.Type</h4>
+    <h4>@Model.Vintage</h4>
+    <hr />
+    <br />
+    <div><b>Gyártási idő:&nbsp;&nbsp;@Model.ProductionTime.ToString("yyyy-MM-dd")</b></div>
+
+
+</fieldset>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Törlés" /> |
+        @Html.ActionLink("Vissza", "Index")
+    </p>
+}
