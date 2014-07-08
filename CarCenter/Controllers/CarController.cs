@@ -17,14 +17,9 @@ namespace CarCenter.Controllers
         {
             using (ISession session = NHibernateSession.OpenSession())
             {
-                var car = session.QueryOver<Car>().OrderBy(x => x.Brand).Asc.List();
-                if (searchtext == null && searchform == -1)
-                {
-                    car = session.QueryOver<Car>().OrderBy(x => x.Brand).Asc.List();
-
-                }
-
-                else
+                var car = session.QueryOver<Car>().OrderBy(x => x.Brand).Asc.ThenBy(x => x.Type).Asc.List();
+                
+                if(searchtext != null && searchform != -1)
                 {
                     int ev = 0;
                     if (searchform == 3)
@@ -33,12 +28,38 @@ namespace CarCenter.Controllers
                     }
                     switch (searchform)
                     {
-                        case 1: car = session.QueryOver<Car>().Where(x => x.Brand == searchtext).OrderBy(x => x.Brand).Asc.List(); break;
-                        case 2: car = session.QueryOver<Car>().Where(x => x.Type == searchtext).OrderBy(x => x.Brand).Asc.List(); break;
-                        case 3: car = session.QueryOver<Car>().Where(x => x.Vintage == ev).OrderBy(x => x.Brand).Asc.List(); break;
-                        default: session.QueryOver<Car>().OrderBy(x => x.Brand).Asc.List(); break;
+                        case 1:
+                            {
+                                car.Clear();
+                                foreach (Car item in session.QueryOver<Car>().OrderBy(x => x.Type).Asc.List())
+                                {
+                                    if (item.Brand.ToLower().StartsWith(searchtext.ToLower()))
+                                        car.Add(item);
+                                }
+                                break;
+                            }
+                        case 2:
+                            {
+                                car.Clear();
+                                foreach (Car item in session.QueryOver<Car>().OrderBy(x => x.Vintage).Asc.List())
+                                {
+                                    if (item.Type.ToLower().StartsWith(searchtext.ToLower()))
+                                        car.Add(item);
+                                }
+                                break;
+                            }
+                        case 3:
+                            {
+                                car = session.QueryOver<Car>().Where(x => x.Vintage == ev).OrderBy(x => x.Brand).Asc.List();
+                                break;
+                            }
+                        default:
+                            {
+                                break;
+                            }
                     }
                 }
+
                 return View(car);
             }
 

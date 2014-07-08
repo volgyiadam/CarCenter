@@ -2,6 +2,7 @@
 using NHibernate;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,21 +18,20 @@ namespace CarCenter.Controllers
         {
             using (ISession session = NHibernateSession.OpenSession())
             {
-                if (searchtext == null)
+                var query = session.QueryOver<Site>().OrderBy(x => x.Address).Asc.List();
+                if (searchtext != null)
                 {
-                    var query = session.QueryOver<Site>().OrderBy(x => x.Address).Asc.List();
-
-                    return View(query);
+                    query.Clear();
+                    foreach (var item in session.QueryOver<Site>().OrderBy(x => x.Address).Asc.List())
+                    {
+                        if (item.Address.ToLower().StartsWith(searchtext.ToLower()))
+                        {
+                            query.Add(item);
+                        }
+                    }
                 }
-
-                else
-                {
-                    var query = session.QueryOver<Site>().Where(x => x.Address == searchtext).OrderBy(x => x.Address).Asc.List();
-
-                    return View(query);
-                }
+                return View(query);
             }
-
         }
 
         //

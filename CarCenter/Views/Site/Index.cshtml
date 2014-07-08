@@ -36,6 +36,7 @@
                 @Html.ActionLink("Szerkesztés", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Autók", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Törlés", "Delete", new { id = item.Id })
+                @*<a href="#" onclick="deleteSite('@item.Id')">Törlés</a>*@
             </td>
 
         </tr>
@@ -45,3 +46,18 @@
     }
 
 </table>
+@*<script type="text/javascript">
+    function deleteSite(id)
+    {
+        if (confirm("Valóban törölni szeretné a telephelyet?"))
+        {
+            $.ajax({
+                url: '@Url.Action("DeleteConfirmed")',
+                type: "POST",
+                data: { id: id },
+            }).success(function () {
+                $("." + id).remove();
+            });
+        }
+    }
+</script>*@
