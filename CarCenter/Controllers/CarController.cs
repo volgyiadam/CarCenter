@@ -194,23 +194,37 @@ namespace CarCenter.Controllers
         ////
         //// POST: /Auto/Delete/5
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
         //[Authorize]
-        public ActionResult DeleteConfirmed(int id)
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    using (ISession session = NHibernateSession.OpenSession())
+        //    {
+        //        using (ITransaction trans = session.BeginTransaction())
+        //        {
+        //            Car auto = session.Get<Car>(id);
+        //            session.Get<Site>(auto.SiteId).ReservedCount -= 1;
+
+        //            session.Delete(auto);
+        //            trans.Commit();
+        //            return RedirectToAction("Index");
+        //        }
+
+        //    }
+        //}
+        [HttpPost]
+        public JsonResult DeleteConfirmed(int id)
         {
             using (ISession session = NHibernateSession.OpenSession())
             {
                 using (ITransaction trans = session.BeginTransaction())
                 {
                     Car auto = session.Get<Car>(id);
-                    session.Get<Site>(auto.SiteId).ReservedCount -= 1;
-
                     session.Delete(auto);
                     trans.Commit();
-                    return RedirectToAction("Index");
+                    return new JsonResult() { Data = new { success = true }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
                 }
-
             }
         }
 

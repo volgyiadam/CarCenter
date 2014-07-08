@@ -21,7 +21,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="@item.Id">
             <td>
                 <h5>@Html.DisplayFor(modelItem => item.Brand)</h5>
             </td>
@@ -32,11 +32,11 @@
                 <h5>@Html.DisplayFor(modelItem => item.Vintage)</h5>
             </td>
         </tr>
-        <tr>
+        <tr class="@item.Id">
             <td></td>
             <td>
                 @{
-        string gyido = item.ProductionTime.ToString("yyyy-MM-dd");
+                    string gyido = item.ProductionTime.ToString("yyyy-MM-dd");
                 }
                 @gyido
             </td>
@@ -54,7 +54,8 @@
             <td>
                 @Html.ActionLink("Szerkesztés", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Részletek", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Törlés", "Delete", new { id = item.Id })
+                @*@Html.ActionLink("Törlés", "Delete", new { id = item.Id })*@
+                <a href="#" onclick="deleteCar('@item.Id')">Törlés</a>
             </td>
         </tr>
         <tr>
@@ -63,3 +64,18 @@
     }
 
 </table>
+<script type="text/javascript">
+    function deleteCar(id)
+    {
+        if (confirm("Valóban törölni szeretné az autót?"))
+        {
+            $.ajax({
+                url: '@Url.Action("DeleteConfirmed")',
+                type: "POST",
+                data: { id: id },
+            }).success(function () {
+                $("." + id).remove();
+            });
+        }
+    }
+</script>
